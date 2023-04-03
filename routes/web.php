@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,7 +19,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/admin',[AdminController::class,"index"])->middleware(["auth","role:admin"])->name("admin.index");
+Route::middleware(["auth","role:admin"])->prefix("admin")->group(function(){
+
+    Route::get('/',[AdminController::class,"index"])->middleware(["auth","role:admin"])->name("admin.index");
+    Route::resource("roles",RoleController::class)->names([
+        'index'=>'role.index',
+        'edit'=>'role.edit',
+        'create'=>'role.create',
+        'show'=>'role.show',
+        'destroy'=>'role.destroy',
+        'store'=>'role.store',
+        'update'=>'role.update',
+
+    ]);
 
 
+});
 require __DIR__.'/auth.php';
