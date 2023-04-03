@@ -18,21 +18,21 @@ class RoleController extends Controller
     public function index()
     {
         $roles =$this->role->paginate();
-        return View("admin.index",["roles"=>$roles]);
+        return View("role.index",["roles"=>$roles]);
     }
 
       //======================================
     public function create()
     {
         $roles =$this->role->get();
-        return View("admin.create",["roles"=>$roles]);
+        return View("role.create",["roles"=>$roles]);
     }
 
       //======================================
     public function edit($id)
     {
         $roles =$this->role->findOrFail($id);
-        return View("admin.edit",["roles"=>$roles]);
+        return View("role.edit",["roles"=>$roles]);
     }
 
       //======================================

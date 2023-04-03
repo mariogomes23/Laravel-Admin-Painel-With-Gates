@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,17 @@ Route::middleware(["auth","role:admin"])->prefix("admin")->group(function(){
         'update'=>'role.update',
 
     ]);
+    Route::resource("permissions",PermissionController::class)->names([
+        'index'=>'permission.index',
+        'edit'=>'permission.edit',
+        'create'=>'permission.create',
+        'show'=>'permission.show',
+        'destroy'=>'permission.destroy',
+        'store'=>'permission.store',
+        'update'=>'permission.update',
+
+    ]);
+
 
 
 });
